@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Library BPMCE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #007bff;
+        }
+        .profile-text {
+            font-size: 14px;
+            text-align: left;
+        }
+        .developer-text {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .developer-text:hover{
+            text-decoration: underline;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+        .search-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .book {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .book:hover {
+            transform: translateY(-5px);
+        }
+        .book img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .book h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .author-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .book h3 {
+            font-size: 14px;
+            color: #666;
+        }
+        .author-btn {
+            padding: 4px 8px;
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: opacity 0.3s ease;
+        }
+        .author-btn:hover {
+            opacity: 0.9;
+        }
+        .button, .return, .wishlist, .preview {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button {
+            background-color: #ffc107;
+            color: #333;
+        }
+        .return {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .wishlist {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .preview {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+        .button:hover, .return:hover, .wishlist:hover, .preview:hover {
+            opacity: 0.9;
+        }
+        .rating {
+            margin: 10px 0;
+        }
+        .review {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .suggest-book {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .suggest-book input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .suggest-book button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .footer {
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+        }
+        .footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <img src="https://i.imgur.com/iSfwOVj.jpeg" alt="Developer Image" class="profile-pic">
+        <div class="profile-text">
+            <p>Meet your <a href="https://instagram.com/nirbhay.jr" class="developer-text">Developer</a></p>
+        </div>
+    </div>
+    <h1>Welcome to the e-Library, BPMCE</h1>
+    <h2>“Some books are undeservedly forgotten; none are undeservedly remembered.” – W.H. Auden</h2>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search for books...">
+    </div>
+
+    <div class="suggest-book">
+        <input type="text" placeholder="Suggest a book...">
+        <button onclick="suggestBook()">Suggest</button>
+    </div>
+
+    <div class="container">
+        <div class="book">
+            <img src="https://images-cdn.ubuy.co.in/677a6bd0ae05f14833022c9a-godan-premchand-paperback-8.jpg" alt="Godan by Premchand">
+            <h2>Godan</h2>
+            <div class="author-container">
+                <h3>Premchand</h3>
+                <button class="author-btn" onclick="showAuthorInfo('Premchand')">Info</button>
+            </div>
+            <button class="button" onclick="issueBook('Godan')">Issue</button>
+            <button class="return" onclick="returnBook('Godan')">Return</button>
+            <button class="wishlist" onclick="addToWishlist('Godan')">Add to Wishlist</button>
+            <button class="preview" onclick="showPreview('Godan')">Preview</button>
+            <div class="rating">
+                <label>Rate: </label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <textarea class="review" placeholder="Write your review..."></textarea>
+        </div>
+        <div class="book">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ6TuNi3xR-LJHzUXFX9z20sTryghF0Wcw2I3b21Wi3sa5et4XYBCqkuVY&s=10" alt="The Other Black Girl">
+            <h2>The Other Black Girl</h2>
+            <div class="author-container">
+                <h3>Zakiya Dalila Harris</h3>
+                <button class="author-btn" onclick="showAuthorInfo('Zakiya Dalila Harris')">Info</button>
+            </div>
+            <button class="button" onclick="issueBook('The Other Black Girl')">Issue</button>
+            <button class="return" onclick="returnBook('The Other Black Girl')">Return</button>
+            <button class="wishlist" onclick="addToWishlist('The Other Black Girl')">Add to Wishlist</button>
+            <button class="preview" onclick="showPreview('The Other Black Girl')">Preview</button>
+            <div class="rating">
+                <label>Rate: </label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <textarea class="review" placeholder="Write your review..."></textarea>
+        </div>
+        <div class="book">
+            <img src="https://i.imgur.com/JSLjd3A.jpeg" alt="Let Us C">
+            <h2>Let Us C</h2>
+            <div class="author-container">
+                <h3>Yashwant Kanetkar</h3>
+                <button class="author-btn" onclick="showAuthorInfo('Yashwant Kanetkar')">Info</button>
+            </div>
+            <button class="button" onclick="issueBook('Let Us C')">Issue</button>
+            <button class="return" onclick="returnBook('Let Us C')">Return</button>
+            <button class="wishlist" onclick="addToWishlist('Let Us C')">Add to Wishlist</button>
+            <button class="preview" onclick="showPreview('Let Us C')">Preview</button>
+            <div class="rating">
+                <label>Rate: </label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <textarea class="review" placeholder="Write your review..."></textarea>
+        </div>
+        <div class="book">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4whr-zAknMYiUIrEqdk8Tprai0g7ZA8TVhLseYSLwaDorjvP0BSRgfGE5&s=10" alt="The Old Man and the Sea">
+            <h2>The Old Man and the Sea</h2>
+            <div class="author-container">
+                <h3>Ernest Hemingway</h3>
+                <button class="author-btn" onclick="showAuthorInfo('Ernest Hemingway')">Info</button>
+            </div>
+            <button class="button" onclick="issueBook('The Old Man and the Sea')">Issue</button>
+            <button class="return" onclick="returnBook('The Old Man and the Sea')">Return</button>
+            <button class="wishlist" onclick="addToWishlist('The Old Man and the Sea')">Add to Wishlist</button>
+            <button class="preview" onclick="showPreview('The Old Man and the Sea')">Preview</button>
+            <div class="rating">
+                <label>Rate: </label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <textarea class="review" placeholder="Write your review..."></textarea>
+        </div>
+        <div class="book">
+            <img src="https://i.imgur.com/nd7LvEM.jpeg" alt="The End of Loneliness">
+            <h2>The End of Loneliness</h2>
+            <div class="author-container">
+                <h3>Benedict Wells</h3>
+                <button class="author-btn" onclick="showAuthorInfo('Benedict Wells')">Info</button>
+            </div>
+            <button class="button" onclick="issueBook('The End of Loneliness')">Issue</button>
+            <button class="return" onclick="returnBook('The End of Loneliness')">Return</button>
+            <button class="wishlist" onclick="addToWishlist('The End of Loneliness')">Add to Wishlist</button>
+            <button class="preview" onclick="showPreview('The End of Loneliness')">Preview</button>
+            <div class="rating">
+                <label>Rate: </label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <textarea class="review" placeholder="Write your review..."></textarea>
+        </div>
+        <div class="book">
+            <img src="https://i.imgur.com/LqADwds.jpeg" alt="The Kite Runner">
+            <h2>The Kite Runner</h2>
+            <div class="author-container">
+                <h3>Khaled Hosseini</h3>
+                <button class="author-btn" onclick="showAuthorInfo('Khaled Hosseini')">Info</button>
+            </div>
+            <button class="button" onclick="issueBook('The Kite Runner')">Issue</button>
+            <button class="return" onclick="returnBook('The Kite Runner')">Return</button>
+            <button class="wishlist" onclick="addToWishlist('The Kite Runner')">Add to Wishlist</button>
+            <button class="preview" onclick="showPreview('The Kite Runner')">Preview</button>
+            <div class="rating">
+                <label>Rate: </label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <textarea class="review" placeholder="You can Review this book"></textarea>
+        </div>
+        <div class="book">
+            <img src="https://i.imgur.com/0GeZvsJ.jpeg" alt="It Ends With Us">
+            <h2>It Ends With Us</h2>
+            <div class="author-container">
+                <h3>Colleen Hoover</h3>
+                <button class="author-btn" onclick="showAuthorInfo('Colleen Hoover')">Info</button>
+            </div>
+            <button class="button" onclick="issueBook('It Ends With Us')">Issue</button>
+            <button class="return" onclick="returnBook('It Ends With Us')">Return</button>
+            <button class="wishlist" onclick="addToWishlist('It Ends With Us')">Add to Wishlist</button>
+            <button class="preview" onclick="showPreview('It Ends With Us')">Preview</button>
+            <div class="rating">
+                <label>Rate: </label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <textarea class="review" placeholder="You can Review this book"></textarea>
+        </div>
+    </div>
+
+    <div class="footer">
+        Created by <strong>Nirbhay</strong> | Contact: <a href="mailto:nirbhay1005@gmail.com">nirbhay1005@gmail.com</a> | Instagram: <a href="https://instagram.com/nirbhay.jr">@nirbhay.jr</a>
+    </div>
+
+    <script>
+        function generateReceiptNumber() {
+            return Math.floor(Math.random() * 1000000);
+        }
+
+        function issueBook(bookTitle) {
+            const receiptNumber = generateReceiptNumber();
+            alert(`Book Issued: ${bookTitle}! Your receipt number is ${receiptNumber}. Come to the library with reference number.`);
+        }
+
+        function returnBook(bookTitle) {
+            const receiptNumber = generateReceiptNumber();
+            alert(`Book Returned: ${bookTitle}! Your receipt number is ${receiptNumber}. Come to the library with reference number.`);
+        }
+
+        function addToWishlist(bookTitle) {
+            alert(`${bookTitle} has been added to your wishlist!`);
+        }
+
+        function showPreview(bookTitle) {
+            alert(`Showing preview for ${bookTitle}. (Sample chapter would be displayed here in a real implementation.)`);
+        }
+
+        function showAuthorInfo(authorName) {
+            const authorInfo = {
+                "Premchand": "Premchand (1880-1936) was an Indian writer famous for his modern Hindi-Urdu literature.",
+                "Zakiya Dalila Harris": "Zakiya Dalila Harris is an American author known for her debut novel 'The Other Black Girl'.",
+                "Yashwant Kanetkar": "Yashwant Kanetkar is an Indian author known for his programming books like 'Let Us C'.",
+                "Ernest Hemingway": "Ernest Hemingway (1899-1961) was an American novelist and Nobel Prize winner.",
+                "Benedict Wells": "Benedict Wells is a German-Swiss novelist known for 'The End of Loneliness'.",
+                "Khaled Hosseini": "Khaled Hosseini is an Afghan-American novelist known for 'The Kite Runner'.",
+                "Colleen Hoover": "Colleen Hoover is an American author known for her romance novels including 'It Ends With Us'."
+            };
+            alert(authorInfo[authorName] || "Author information not available.");
+        }
+
+        function suggestBook() {
+            const suggestion = document.querySelector('.suggest-book input').value;
+            if (suggestion) {
+                alert(`Thank you for suggesting: ${suggestion}! We'll consider adding it to our library.`);
+            } else {
+                alert("Please enter a book title to suggest.");
+            }
+        }
+    </script>
+</body>
+</html>
